@@ -110,5 +110,12 @@ public class UsuarioController {
 		return mv;
 	}//fim dashboard
 	
+	@GetMapping("/usuario/recuperarSenha")
+	public ModelAndView recuperarSenha() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("usuario", new Usuario());
+		mv.setViewName("Login/recuperar");
+		return mv;
+	}
 	
 }

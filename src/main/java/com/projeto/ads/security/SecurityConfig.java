@@ -29,6 +29,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
 			authorize
 			.antMatchers("/css/**", "/js/**").permitAll()
 			.antMatchers("/usuario/inserir").permitAll()
+			.antMatchers("/usuario/recuperarSenha").permitAll()
 			.anyRequest().authenticated() //todas as requisições precisam de autenticação
 		)
 		.formLogin(form ->
