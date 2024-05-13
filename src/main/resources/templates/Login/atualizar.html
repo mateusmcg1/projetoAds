@@ -1,0 +1,61 @@
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<!------ Include the above in your HEAD tag ---------->
+	<title>Recuperar senha do usuário</title>
+</head>
+
+<body>
+	<div id="login">
+		<h3 class="text-center text-white pt-5">Recuperar senha</h3>
+		<div lass="container">
+			<div id-"login-row" class="row justify-content-center align-items-center">
+				<div id="login-column" class="col-md-6">
+					<div id="login-box" class="col-md-12">
+						<form id="cadastro-form" class="form" method="post" th:object="${usuario}"
+							action="/usuario/atualizarUsuario">
+							<h3 class="text-center text-info">Atualize seu usuário no sistema</h3>
+							<input type="hidden" name="login" th:value="${usuario.username}" class="form-control">
+							<div class="alert alert-danger" role="alert" th:if="${msg}">
+								<strong th:text="${msg}"></strong>
+							</div>
+							<div class="form-group">
+								<label for"username" class="text-info">Email:</label><br>
+								<input type="email" name="email" id="email" th:field="*{email}" placeholder="email"
+									clas="form-control readonly">
+							</div>
+							<div class="form-group">
+								<label class="text-info">Senha:</label><br>
+								<input type="password" name="senha" id="senha" th:field="*{senha}" placeholder="senha"
+									class="form-control">
+							</div>
+							<div class="form-group">
+								<label class="text-info">Confirmar senha:</label><br>
+								<input type="password" name="confirmarSenha" id="confirmarSenha" th:field="*{senha}"
+									placeholder="confirmarSenha" class="form-control">
+							</div>
+							<div class="form-group">
+								<label class="text-info">token:</label><br>
+								<input type="text" name="token" id="token" th:field="*{token}"
+									placeholder="token" class="form-control">
+							</div>
+							<div id="register-link" class="form-group text-center">
+								<button type="submit" class="btn btn-success mx-auto">Atualizar</button>
+							</div>
+
+						</form>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</body>
+
+</html>

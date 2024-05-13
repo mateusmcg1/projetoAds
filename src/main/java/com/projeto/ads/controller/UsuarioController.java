@@ -16,7 +16,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.projeto.ads.repository.UserRepository;
+import com.projeto.ads.service.EmailService;
 import com.projeto.ads.service.UserService;
+import com.projeto.ads.util.Util;
 import com.projeto.ads.model.Role;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,6 +38,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@PostMapping("/usuario/inserir")
 	public ModelAndView salvarUsuario(@ModelAttribute Usuario usuario,
@@ -115,6 +120,25 @@ public class UsuarioController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("usuario", new Usuario());
 		mv.setViewName("Login/recuperar");
+		return mv;
+	}
+	
+	@PostMapping("/usuario/recuperarSenha")
+	public ModelAndView recuperarSenha(Usuario user) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		Usuario aux = userRepository.findByEmail(user.getEmail());
+		if(aux == null) {
+		mv.addObject("msg", "Email não encontrado!");
+		mv.setViewName("Login/recuperar");
+		}else {
+			aux.setToken(Util.generateToken());
+			userRepository.save(aux);
+			String corpo = "Use o seguinte token para redefinir a senha:"+aux.getToken();
+			aux.setToken("");
+			mv.addObject("usuario", aux);
+			//emailService.sendEmail("senaclpoo@gmail.com", aux.getEmail(), "recuperação de senha", corpo);
+			mv.setViewName("Login/atualizar");
+	}
 		return mv;
 	}
 	
