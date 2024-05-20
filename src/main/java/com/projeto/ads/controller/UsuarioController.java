@@ -141,7 +141,7 @@ public class UsuarioController {
 	@GetMapping("/usuario/atualizar")
 	public ModelAndView alterarSenha(@ModelAttribute Usuario user) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("usuario", new Usuario());
+		mv.addObject("usuario", user);
 		mv.setViewName("Login/recuperar");
 		return mv;
 	}
