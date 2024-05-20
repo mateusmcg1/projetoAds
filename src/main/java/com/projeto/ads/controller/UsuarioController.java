@@ -6,12 +6,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.projeto.ads.model.Usuario;
-
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.Authentication;
-
 import com.projeto.ads.repository.RoleRepository;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +17,6 @@ import com.projeto.ads.service.EmailService;
 import com.projeto.ads.service.UserService;
 import com.projeto.ads.util.Util;
 import com.projeto.ads.model.Role;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -74,7 +70,7 @@ public class UsuarioController {
 	usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 	usuario.setUsername(usuario.getEmail());
 	// Salvar o usuário no banco de dados
-	//userRepository.save(usuario);
+	userRepository.save(usuario);
 	// Redirecionar para a página de login após salvar o usuário
 	mv.setViewName("redirect:/login");
 	return mv;
@@ -139,6 +135,36 @@ public class UsuarioController {
 			//emailService.sendEmail("senaclpoo@gmail.com", aux.getEmail(), "recuperação de senha", corpo);
 			mv.setViewName("Login/atualizar");
 	}
+		return mv;
+	}
+	
+	@GetMapping("/usuario/atualizar")
+	public ModelAndView alterarSenha(@ModelAttribute Usuario user) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("usuario", new Usuario());
+		mv.setViewName("Login/recuperar");
+		return mv;
+	}
+	
+	@PostMapping("/usuario/atualizarUsuario")
+		public ModelAndView atualizarUser(
+				@ModelAttribute Usuario user,
+				@RequestParam("confirmPassword") String confirmPassword
+		) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		Usuario aux = userRepository.findByEmail(user.getEmail());
+		if(aux == null || !user.getToken().equals(aux.getToken())) {
+			mv.addObject("msg", "Token não encontrado!");
+			mv.addObject("usuario", user);
+			mv.setViewName("Login/atualizar");
+		}else {
+			aux.setToken(""); //garantir que o token não seja mais usado
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
+			userRepository.save(aux);
+			mv.addObject("usuario", new Usuario());
+			mv.setViewName("Login/login");
+			
+		}
 		return mv;
 	}
 	
