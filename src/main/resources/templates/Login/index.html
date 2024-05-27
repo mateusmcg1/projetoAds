@@ -1,4 +1,5 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -7,7 +8,61 @@
 	<!------ Include the above in your HEAD tag ---------->
 	<title>Painel de Usuário</title>
 </head>
+
 <body>
-	<h1>Bem vindo, <span th:text="${nomeUsuario}">s</span>!</h1>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<div class="collapse navbar-collapse" id="textoNavbar">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="#">Home<span class="sr-only">(Página atual)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Cadastrar Aluno</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Pesquisar Aluno</a>
+					</li>
+				</ul>
+				<span class="navbar-text">
+					<div class="collapse navbar-collapse" id="textoNavbar">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item">
+								<a class="nav-link" href="#">Sair</a>
+							</li>
+						</ul>
+
+					</div>
+
+				</span>
+			</div>
+
+		</nav>
+	</header>
+	
+	<section class="neo-section">
+		<div class="center neo-container">
+			<h1 class="text-center mb-5 mt-5">Sistema de Gerenciamento de Alunos</h1>
+			<div class="row text-center">
+				<div class="col-6 mb-5 mt-5">
+					<button class="btn btn-primary">Cadastrar aluno</button>
+				</div>
+				<div class="col-6 mb-5 mt-5">
+					<button class="btn btn-success">Encontrar Aluno</button>
+				</div>
+				
+			</div>
+		</div>
+	</section>
+	<footer class="bg-primary text-center text-lg-start">
+		<div>
+			<div class="text-center p-3" style="color: #fff; font-weight: bold;">
+				₢ 2024 Copyrith: SENAC
+			</div>
+		</div>
+		
+	</footer>
+
 </body>
+
 </html>

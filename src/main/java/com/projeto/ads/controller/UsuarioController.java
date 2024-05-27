@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.projeto.ads.model.Usuario;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.Authentication;
@@ -120,7 +122,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/usuario/recuperarSenha")
-	public ModelAndView recuperarSenha(Usuario user) throws Exception{
+	public ModelAndView recuperarSenha(Usuario user, RedirectAttributes redirectAttributes) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		Usuario aux = userRepository.findByEmail(user.getEmail());
 		if(aux == null) {
@@ -132,8 +134,9 @@ public class UsuarioController {
 			String corpo = "Use o seguinte token para redefinir a senha:"+aux.getToken();
 			aux.setToken("");
 			mv.addObject("usuario", aux);
+			redirectAttributes.addFlashAttribute("usuario",aux);
 			//emailService.sendEmail("senaclpoo@gmail.com", aux.getEmail(), "recuperação de senha", corpo);
-			mv.setViewName("Login/atualizar");
+			mv.setViewName("redirect:/usuario/atualizarUsuario");
 	}
 		return mv;
 	}
@@ -143,6 +146,14 @@ public class UsuarioController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("usuario", user);
 		mv.setViewName("Login/recuperar");
+		return mv;
+	}
+	
+	@GetMapping("/usuario/atualizarUsuario")
+	public ModelAndView updatePassword(Usuario user) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("usuario", user);
+		mv.setViewName("Login/atualizar");
 		return mv;
 	}
 	
@@ -159,7 +170,7 @@ public class UsuarioController {
 			mv.setViewName("Login/atualizar");
 		}else {
 			aux.setToken(""); //garantir que o token não seja mais usado
-			user.setPassword(passwordEncoder.encode(user.getPassword()));
+			aux.setPassword(passwordEncoder.encode(user.getPassword()));
 			userRepository.save(aux);
 			mv.addObject("usuario", new Usuario());
 			mv.setViewName("Login/login");
