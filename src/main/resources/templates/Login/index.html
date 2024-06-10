@@ -3,6 +3,9 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+		integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 	<!------ Include the above in your HEAD tag ---------->
@@ -15,13 +18,21 @@
 			<div class="collapse navbar-collapse" id="textoNavbar">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
-						<a class="nav-link" href="#">Home<span class="sr-only">(Página atual)</span></a>
+						<a class="nav-link" th:href="@{home}"> <i class="fa fa-home"></i>Home<span
+								class="sr-only">(Página atual)</span></a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Cadastrar Aluno</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Pesquisar Aluno</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown"><i
+								class="fa fa-user"></i>Aluno</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" th:href="@{/aluno/editar}"><i class="fa fa-pencil-square"></i>
+								Editar</a>
+							<a class="dropdown-item" th:href="@{/aluno/deletar}"><i class="fa fa-trash"></i> Excluir</a>
+							<a class="dropdown-item" th:href="@{/aluno/inserir}"><i class="fa fa-graduation-cap"></i>
+								Inserir</a>
+							<a class="dropdown-item" th:href="@{/aluno/listar}"><i class="fa fa-search"></i> Listar </a>
+
+						</div>
 					</li>
 				</ul>
 				<span class="navbar-text">
@@ -39,7 +50,7 @@
 
 		</nav>
 	</header>
-	
+
 	<section class="neo-section">
 		<div class="center neo-container">
 			<h1 class="text-center mb-5 mt-5">Sistema de Gerenciamento de Alunos</h1>
@@ -50,7 +61,7 @@
 				<div class="col-6 mb-5 mt-5">
 					<button class="btn btn-success">Encontrar Aluno</button>
 				</div>
-				
+
 			</div>
 		</div>
 	</section>
@@ -60,7 +71,7 @@
 				₢ 2024 Copyrith: SENAC
 			</div>
 		</div>
-		
+
 	</footer>
 
 </body>
