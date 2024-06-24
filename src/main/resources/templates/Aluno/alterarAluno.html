@@ -98,7 +98,7 @@
 				<div class="col-md-6 offset-md-3">
 					<label>Selecione o Período</label>
 					<select class="form-control" th:field="*{periodo}">
-						<option th:each="status:${T(com.projeto.ads.Enum.Periodo).
+						<option th:each="periodo:${T(com.projeto.ads.Enum.Periodo).
 						values()}" th:value="${periodo}" th:text="${periodo}">
 						</option>
 					</select>
