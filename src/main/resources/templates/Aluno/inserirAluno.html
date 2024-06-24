@@ -14,7 +14,7 @@
 			<div class="collapse navbar-collapse" id="textoNavbar">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
-					<a class="nav-link" th:href="@{dashboard}"><i class="fa fa-home"></i>Home<span class="sr-only">(Página atual)</span></a>
+					<a class="nav-link" th:href="@{/dashboard}"><i class="fa fa-home"></i>Home<span class="sr-only">(Página atual)</span></a>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown"><i class="fa fa-user"></i>Aluno</a>
@@ -91,7 +91,7 @@
 			<div class="col-md-6 offset-md-3">
 				<label>Selecione o Período</label>
 				<select class="form-control" th:field="*{periodo}">
-					<option th:each="status:${T(com.projeto.ads.Enum.Periodo).
+					<option th:each="periodo:${T(com.projeto.ads.Enum.Periodo).
 					values()}" th:value="${periodo}"
 					th:text="${periodo}">
 					</option>

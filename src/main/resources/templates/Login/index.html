@@ -18,7 +18,7 @@
 			<div class="collapse navbar-collapse" id="textoNavbar">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
-						<a class="nav-link" th:href="@{home}"> <i class="fa fa-home"></i>Home<span
+						<a class="nav-link" th:href="@{/dashboard}"> <i class="fa fa-home"></i>Home<span
 								class="sr-only">(Página atual)</span></a>
 					</li>
 					<li class="nav-item dropdown">
@@ -56,10 +56,10 @@
 			<h1 class="text-center mb-5 mt-5">Sistema de Gerenciamento de Alunos</h1>
 			<div class="row text-center">
 				<div class="col-6 mb-5 mt-5">
-					<button class="btn btn-primary" th:href="@{/aluno/inserir}">Cadastrar aluno</button>
+					<a class="btn btn-primary" th:href="@{/aluno/inserir}">Cadastrar aluno</a>
 				</div>
 				<div class="col-6 mb-5 mt-5">
-					<button class="btn btn-success">Encontrar Aluno</button>
+					<a class="btn btn-success" th:href="@{/aluno/listar}">Encontrar Aluno</a>
 				</div>
 
 			</div>

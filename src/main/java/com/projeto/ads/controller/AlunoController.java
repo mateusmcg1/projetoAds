@@ -58,6 +58,14 @@ public class AlunoController {
 		mv.setViewName("Aluno/alterarAluno");
 		return mv;
 	}//
+	
+	@GetMapping("/aluno/editar")
+	public ModelAndView alterarAluno() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("alunos", alunoRepository.findAllOrderedById());
+		mv.setViewName("Aluno/listarAluno");
+		return mv;
+	}//
 
 	@PostMapping("/aluno/alterar")
 	public ModelAndView alterarAluno(Aluno aluno) {
@@ -66,12 +74,24 @@ public class AlunoController {
 		if (out != null) {
 			mv.addObject("msg", out);
 			mv.addObject("aluno", aluno);
-			mv.setViewName("Login/alterarAluno");
+			mv.setViewName("Aluno/alterarAluno");
 		} else {
 			mv.setViewName("redirect:/aluno/listar");
 		}
-
 		return mv;
 	}
+	@GetMapping("/aluno/excluir/{id}")
+	public String excluirAluno(@PathVariable("id") long id) {
+		alunoRepository.deleteById(id);
+		return "redirect:/aluno/listar";
+	}
+	
+	@GetMapping("/aluno/deletar")
+	public ModelAndView excluirAluno() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("alunos", alunoRepository.findAllOrderedById());
+		mv.setViewName("Aluno/listarAluno");
+		return mv;
+	}//
 
 }
